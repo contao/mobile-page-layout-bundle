@@ -1,0 +1,49 @@
+{
+    "name": "contao/mobile-page-layout-bundle",
+    "type": "symfony-bundle",
+    "description": "Contao 4 mobile page layout bundle",
+    "license": "LGPL-3.0-or-later",
+    "authors": [
+        {
+            "name": "Yanick Witschi",
+            "homepage": "https://github.com/toflar"
+        }
+    ],
+    "require": {
+        "php": "^7.1",
+        "contao/core-bundle": "^4.7"
+    },
+    "require-dev": {
+        "contao/manager-plugin": "^2.0",
+        "php-http/guzzle6-adapter": "^1.1",
+        "phpunit/phpunit": "^7.0",
+        "symfony/phpunit-bridge": "^3.4.5",
+        "contao/test-case": "^2.0",
+        "friendsofphp/php-cs-fixer": "^2.12"
+    },
+    "extra": {
+        "contao-manager-plugin": "Contao\\MobilePageLayoutBundle\\ContaoManager\\Plugin"
+    },
+    "autoload": {
+        "psr-4": {
+            "Contao\\MobilePageLayoutBundle\\": "src/"
+        },
+        "exclude-from-classmap": [
+            "src/Resources/contao/config/",
+            "src/Resources/contao/dca/",
+            "src/Resources/contao/languages/",
+            "src/Resources/contao/templates/"
+        ]
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Contao\\MobilePageLayoutBundle\\Test\\": "tests/"
+        }
+    },
+    "support": {
+        "issues": "https://github.com/contao/contao/issues",
+        "forum": "https://community.contao.org",
+        "source": "https://github.com/contao/mobile-page-layout-bundle",
+        "docs": "https://docs.contao.org"
+    }
+}
