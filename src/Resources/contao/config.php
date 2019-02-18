@@ -18,10 +18,6 @@
 	// Layout
 	if ($parentPage->includeLayout)
 	{
-		if ($currentPage->layout === false)
-		{
-			$currentPage->layout = $parentPage->layout;
-		}
 		if ($currentPage->mobileLayout === false)
 		{
 			$currentPage->mobileLayout = $parentPage->mobileLayout;
