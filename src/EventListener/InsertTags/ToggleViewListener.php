@@ -56,7 +56,7 @@ class ToggleViewListener
         }
 
         if ($cache) {
-            return '{{esi::toggle_view}}';
+            return '{{toggle_view|uncached}}';
         }
 
         $request = $this->requestStack->getMasterRequest();
