@@ -1,15 +1,21 @@
-contao_mobile_page_layout.listener.toggle_view:
-    class: Contao\MobilePageLayoutBundle\EventListener\ToggleViewListener
-    arguments:
-        - "@contao.framework"
-        - "@contao.routing.scope_matcher"
-    tags:
-        - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest }
+services:
+    contao_mobile_page_layout.listener.toggle_view:
+        class: Contao\MobilePageLayoutBundle\EventListener\ToggleViewListener
+        arguments:
+            - "@contao.framework"
+            - "@contao.routing.scope_matcher"
+        tags:
+            - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest }
 
-contao_mobile_page_layout.listener.override_page_layout:
-    class: Contao\MobilePageLayoutBundle\EventListener\OverridePageLayoutListener
-    arguments:
-        - "@contao.framework"
-        - "@request_stack"
-    tags:
-        - { name: contao.hook, hook: getPageLayout }
+    contao_mobile_page_layout.listener.override_page_layout:
+        class: Contao\MobilePageLayoutBundle\EventListener\OverridePageLayoutListener
+        arguments:
+            - "@contao.framework"
+            - "@request_stack"
+        tags:
+            - { name: contao.hook, hook: getPageLayout }
+
+    contao_mobile_page_layout.listener.enforce_private_response:
+        class: Contao\CoreBundle\EventListener\EnforcePrivateResponseListener
+        tags:
+            - { name: kernel.event_listener, event: kernel.response }

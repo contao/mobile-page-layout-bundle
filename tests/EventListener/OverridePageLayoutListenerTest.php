@@ -39,7 +39,7 @@ class OverridePageLayoutListenerTest extends ContaoTestCase
             ->willReturn($agent)
         ;
 
-        $layoutModel = $this->mockClassWithProperties(LayoutModel::class, [
+        $layoutModel = $this->mockClassWithGetterSetter(LayoutModel::class, [
             'id' => $expectedMobileLayoutId ?: 12,
         ]);
 
@@ -68,7 +68,13 @@ class OverridePageLayoutListenerTest extends ContaoTestCase
         $listener = new OverridePageLayoutListener($framework, $requestStack);
         $listener->onGetPageLayout($pageModel, $layoutModel);
 
-        $this->assertSame($expectedMobileLayoutId ?: 12, $layoutModel->id);
+        if ($expectedMobileLayoutId) {
+            $this->assertSame($expectedMobileLayoutId, $layoutModel->id);
+            $this->assertTrue($pageModel->isMobile);
+        } else {
+            $this->assertSame(12, $layoutModel->id);
+            $this->assertFalse($pageModel->isMobile);
+        }
     }
 
     public function getLayoutData(): \Generator
@@ -132,7 +138,7 @@ class OverridePageLayoutListenerTest extends ContaoTestCase
 
     private function getPageModel(?int $mobileLayout): PageModel
     {
-        return $this->mockClassWithProperties(PageModel::class, [
+        return $this->mockClassWithGetterSetter(PageModel::class, [
             'mobileLayout' => $mobileLayout,
         ]);
     }

@@ -39,6 +39,8 @@ class OverridePageLayoutListener
     public function onGetPageLayout(PageModel $pageModel, LayoutModel &$layoutModel): void
     {
         if (!$pageModel->mobileLayout) {
+            $pageModel->isMobile = false;
+
             return;
         }
 
@@ -50,6 +52,8 @@ class OverridePageLayoutListener
         if (null !== $request && $request->cookies->has('TL_VIEW')) {
             $isMobile = 'mobile' === $request->cookies->get('TL_VIEW');
         }
+
+        $pageModel->isMobile = $isMobile;
 
         if (!$isMobile) {
             return;
