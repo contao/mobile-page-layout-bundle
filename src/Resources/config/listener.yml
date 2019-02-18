@@ -28,3 +28,8 @@ services:
             - "%fragment.path%"
         tags:
             - { name: contao.hook, hook: replaceInsertTags }
+
+    contao_mobile_page_layout.listener.inherit_mobile_layout:
+        class: Contao\MobilePageLayoutBundle\EventListener\InheritMobileLayoutListener
+        tags:
+            - { name: contao.hook, hook: loadPageDetails }
