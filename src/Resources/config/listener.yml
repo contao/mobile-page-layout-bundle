@@ -16,6 +16,15 @@ services:
             - { name: contao.hook, hook: getPageLayout }
 
     contao_mobile_page_layout.listener.enforce_private_response:
-        class: Contao\CoreBundle\EventListener\EnforcePrivateResponseListener
+        class: Contao\MobilePageLayoutBundle\EventListener\EnforcePrivateResponseListener
         tags:
             - { name: kernel.event_listener, event: kernel.response }
+
+    contao_mobile_page_layout.listener.insert_tags.toggle_view:
+        class: Contao\MobilePageLayoutBundle\EventListener\InsertTags\ToggleViewListener
+        arguments:
+            - "@contao.framework"
+            - "@request_stack"
+            - "%fragment.path%"
+        tags:
+            - { name: contao.hook, hook: replaceInsertTags }
