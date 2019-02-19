@@ -1,7 +1,7 @@
 {
     "name": "contao/mobile-page-layout-bundle",
-    "type": "symfony-bundle",
-    "description": "Contao 4 mobile page layout bundle",
+    "type": "contao-bundle",
+    "description": "Adds a mobile page layout to Contao 4",
     "license": "LGPL-3.0-or-later",
     "authors": [
         {
@@ -11,15 +11,15 @@
     ],
     "require": {
         "php": "^7.1",
-        "contao/core-bundle": "^4.7"
+        "contao/core-bundle": "4.8.x-dev"
     },
     "require-dev": {
-        "contao/manager-plugin": "^2.0",
+        "contao/manager-plugin": "^2.3.1",
+        "contao/test-case": "^2.0",
+        "friendsofphp/php-cs-fixer": "^2.12",
         "php-http/guzzle6-adapter": "^1.1",
         "phpunit/phpunit": "^7.0",
-        "symfony/phpunit-bridge": "^3.4.5",
-        "contao/test-case": "^2.0",
-        "friendsofphp/php-cs-fixer": "^2.12"
+        "symfony/phpunit-bridge": "^3.4.5"
     },
     "extra": {
         "contao-manager-plugin": "Contao\\MobilePageLayoutBundle\\ContaoManager\\Plugin"
@@ -29,15 +29,13 @@
             "Contao\\MobilePageLayoutBundle\\": "src/"
         },
         "exclude-from-classmap": [
-            "src/Resources/contao/config/",
             "src/Resources/contao/dca/",
-            "src/Resources/contao/languages/",
-            "src/Resources/contao/templates/"
+            "src/Resources/contao/languages/"
         ]
     },
     "autoload-dev": {
         "psr-4": {
-            "Contao\\MobilePageLayoutBundle\\Test\\": "tests/"
+            "Contao\\MobilePageLayoutBundle\\Tests\\": "tests/"
         }
     },
     "support": {

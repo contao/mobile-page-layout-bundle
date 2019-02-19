@@ -10,8 +10,9 @@ declare(strict_types=1);
  * @license LGPL-3.0-or-later
  */
 
-namespace Contao\MobilePageLayoutBundle\EventListener;
+namespace Contao\MobilePageLayoutBundle\Tests\EventListener;
 
+use Contao\MobilePageLayoutBundle\EventListener\EnforcePrivateResponseListener;
 use Contao\PageModel;
 use Contao\TestCase\ContaoTestCase;
 use Symfony\Component\HttpFoundation\Request;

@@ -3,7 +3,7 @@
 <phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:noNamespaceSchemaLocation="http://schema.phpunit.de/7.0/phpunit.xsd"
          colors="true"
-         defaultTestSuite="contao-mobile-page-layout-bundle"
+         defaultTestSuite="mobile-page-layout-bundle"
          bootstrap="tests/bootstrap.php"
 >
     <php>
@@ -12,7 +12,7 @@
     </php>
 
     <testsuites>
-        <testsuite name="contao-mobile-page-layout-bundle">
+        <testsuite name="mobile-page-layout-bundle">
             <directory>./tests</directory>
         </testsuite>
     </testsuites>

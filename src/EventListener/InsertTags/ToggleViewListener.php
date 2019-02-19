@@ -67,7 +67,6 @@ class ToggleViewListener
 
         /** @var Environment $environment */
         $environment = $this->framework->getAdapter(Environment::class);
-
         $strRequest = $environment->get('request');
 
         // ESI request
@@ -78,9 +77,11 @@ class ToggleViewListener
         $strUrl = ampersand($strRequest);
         $strGlue = (false === strpos($strUrl, '?')) ? '?' : '&amp;';
 
-        $this->framework->getAdapter(System::class)->loadLanguageFile('default');
+        /** @var System $system */
+        $system = $this->framework->getAdapter(System::class);
+        $system->loadLanguageFile('default');
 
-        if ('mobile' === $request->cookies->get('TL_VIEW') || $environment->get('agent')->mobile && 'desktop' !== $request->cookies->get('TL_VIEW')) {
+        if ('mobile' === $request->cookies->get('TL_VIEW') || ($environment->get('agent')->mobile && 'desktop' !== $request->cookies->get('TL_VIEW'))) {
             return '<a href="'.$strUrl.$strGlue.'toggle_view=desktop" class="toggle_desktop" title="'.StringUtil::specialchars($GLOBALS['TL_LANG']['MSC']['toggleDesktop'][1]).'">'.$GLOBALS['TL_LANG']['MSC']['toggleDesktop'][0].'</a>';
         }
 

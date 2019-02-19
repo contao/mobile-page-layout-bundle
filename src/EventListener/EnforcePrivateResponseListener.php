@@ -17,10 +17,10 @@ use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
 
 class EnforcePrivateResponseListener
 {
-    public function onKernelResponse(FilterResponseEvent $event)
+    public function onKernelResponse(FilterResponseEvent $event): void
     {
         if (!isset($GLOBALS['objPage'])) {
-            return null;
+            return;
         }
 
         /** @var PageModel $objPage */

@@ -17,9 +17,9 @@ use Contao\PageModel;
 class InheritMobileLayoutListener
 {
     /**
-     * Inherit mobile layout from parent models.
+     * Inherits the mobile layout from the parent models.
      */
-    public function onLoadPageDetails(PageModel $page, array $parentModels): void
+    public function onLoadPageDetails(array $parentModels, PageModel $page): void
     {
         $page->mobileLayout = $page->includeLayout ? $page->mobileLayout : false;
 

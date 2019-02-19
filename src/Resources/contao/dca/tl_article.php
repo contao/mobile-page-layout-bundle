@@ -11,9 +11,9 @@
 /**
  * Override core options_callback
  */
-$GLOBALS['TL_DCA']['tl_article']['fields']['inColumn']['options_callback'][0] = 'tl_article_contao_mobile_page_layout_bundle';
+$GLOBALS['TL_DCA']['tl_article']['fields']['inColumn']['options_callback'][0] = 'tl_article_mobile_page_layout_bundle';
 
-class tl_article_contao_mobile_page_layout_bundle
+class tl_article_mobile_page_layout_bundle
 {
     /**
      * Return all active layout sections as array
@@ -36,14 +36,14 @@ class tl_article_contao_mobile_page_layout_bundle
                 if (!$objPage->$key)
                 {
                     continue;
-				}
+                }
 
-				$objLayout = Contao\LayoutModel::findByPk($objPage->$key);
+                $objLayout = Contao\LayoutModel::findByPk($objPage->$key);
 
- 				if ($objLayout === null)
+                if ($objLayout === null)
                 {
                     continue;
- 				}
+                }
 
                 $arrModules = Contao\StringUtil::deserialize($objLayout->modules);
 

@@ -46,8 +46,8 @@ class OverridePageLayoutListener
 
         /** @var Environment $environment */
         $environment = $this->framework->getAdapter(Environment::class);
-        $request = $this->requestStack->getMasterRequest();
         $isMobile = $environment->get('agent')->mobile;
+        $request = $this->requestStack->getMasterRequest();
 
         if (null !== $request && $request->cookies->has('TL_VIEW')) {
             $isMobile = 'mobile' === $request->cookies->get('TL_VIEW');
@@ -59,6 +59,8 @@ class OverridePageLayoutListener
             return;
         }
 
-        $layoutModel = $this->framework->getAdapter(LayoutModel::class)->findByPk($pageModel->mobileLayout);
+        /** @var LayoutModel $layout */
+        $layout = $this->framework->getAdapter(LayoutModel::class);
+        $layoutModel = $layout->findByPk($pageModel->mobileLayout);
     }
 }
