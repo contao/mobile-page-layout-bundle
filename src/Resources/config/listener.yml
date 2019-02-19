@@ -15,8 +15,8 @@ services:
         tags:
             - { name: contao.hook, hook: getPageLayout }
 
-    contao_mobile_page_layout.listener.enforce_private_response:
-        class: Contao\MobilePageLayoutBundle\EventListener\EnforcePrivateResponseListener
+    contao_mobile_page_layout.listener.disable_cache:
+        class: Contao\MobilePageLayoutBundle\EventListener\DisableCacheListener
         tags:
             - { name: kernel.event_listener, event: kernel.response }
 

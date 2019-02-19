@@ -12,7 +12,7 @@ declare(strict_types=1);
 
 namespace Contao\MobilePageLayoutBundle\Tests\EventListener;
 
-use Contao\MobilePageLayoutBundle\EventListener\EnforcePrivateResponseListener;
+use Contao\MobilePageLayoutBundle\EventListener\DisableCacheListener;
 use Contao\PageModel;
 use Contao\TestCase\ContaoTestCase;
 use Symfony\Component\HttpFoundation\Request;
@@ -20,9 +20,9 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 
-class EnforcePrivateResponseListenerTest extends ContaoTestCase
+class DisableCacheListenerTest extends ContaoTestCase
 {
-    public function testResponseRemainseUntouchedIfMobileIsNotEnabled(): void
+    public function testResponseRemainsUntouchedIfMobileLayoutIsNotAssigned(): void
     {
         $response = new Response();
         $response->setSharedMaxAge(600);
@@ -35,17 +35,16 @@ class EnforcePrivateResponseListenerTest extends ContaoTestCase
         );
 
         $GLOBALS['objPage'] = $this->mockClassWithProperties(PageModel::class, [
-            'isMobile' => false,
+            'mobileLayout' => false,
         ]);
 
-        $listener = new EnforcePrivateResponseListener();
+        $listener = new DisableCacheListener();
         $listener->onKernelResponse($event);
 
-        $this->assertFalse($event->getResponse()->headers->hasCacheControlDirective('private'));
-        $this->assertTrue($event->getResponse()->headers->hasCacheControlDirective('public'));
+        $this->assertSame('public, s-maxage=600', $event->getResponse()->headers->get('Cache-Control'));
     }
 
-    public function testEnforcesPrivateResponseIfMobileIsEnabled(): void
+    public function testDisablesCacheIfMobileLayoutIsAssigned(): void
     {
         $response = new Response();
         $response->setSharedMaxAge(600);
@@ -58,13 +57,12 @@ class EnforcePrivateResponseListenerTest extends ContaoTestCase
         );
 
         $GLOBALS['objPage'] = $this->mockClassWithProperties(PageModel::class, [
-            'isMobile' => true,
+            'mobileLayout' => 42,
         ]);
 
-        $listener = new EnforcePrivateResponseListener();
+        $listener = new DisableCacheListener();
         $listener->onKernelResponse($event);
 
-        $this->assertTrue($event->getResponse()->headers->hasCacheControlDirective('private'));
-        $this->assertFalse($event->getResponse()->headers->hasCacheControlDirective('public'));
+        $this->assertSame('no-store, private', $event->getResponse()->headers->get('Cache-Control'));
     }
 }

@@ -15,7 +15,7 @@ namespace Contao\MobilePageLayoutBundle\EventListener;
 use Contao\PageModel;
 use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
 
-class EnforcePrivateResponseListener
+class DisableCacheListener
 {
     public function onKernelResponse(FilterResponseEvent $event): void
     {
@@ -26,8 +26,9 @@ class EnforcePrivateResponseListener
         /** @var PageModel $objPage */
         $objPage = $GLOBALS['objPage'];
 
-        if ($objPage->isMobile) {
-            $event->getResponse()->setPrivate();
+        // If the current page has a mobile layout assigned, we disable caching
+        if ($objPage->mobileLayout) {
+            $event->getResponse()->headers->set('Cache-Control', 'no-store');
         }
     }
 }
