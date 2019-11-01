@@ -9,7 +9,7 @@
  */
 
 $GLOBALS['TL_DCA']['tl_page']['config']['onload_callback'][] = function() {
-    \Contao\CoreBundle\DataContainer\PaletteManipulator::create()
+    Contao\CoreBundle\DataContainer\PaletteManipulator::create()
         ->addField('mobileLayout', 'layout')
         ->applyToSubpalette('includeLayout', 'tl_page');
 };

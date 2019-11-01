@@ -67,7 +67,7 @@ class tl_article_mobile_page_layout_bundle
         else
         {
             $arrSections = array('header', 'left', 'right', 'main', 'footer');
-            $objLayout = $this->Database->query("SELECT sections FROM tl_layout WHERE sections!=''");
+            $objLayout = Contao\Database::getInstance()->query("SELECT sections FROM tl_layout WHERE sections!=''");
 
             while ($objLayout->next())
             {
