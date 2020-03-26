@@ -23,12 +23,14 @@ class InheritMobileLayoutListener
     {
         $page->mobileLayout = $page->includeLayout ? $page->mobileLayout : false;
 
-        if ($page->mobileLayout === false) {
-            foreach ($parentModels as $parentModel) {
-                if ($parentModel->includeLayout && $parentModel->mobileLayout) {
-                    $page->mobileLayout = $parentModel->mobileLayout;
-                    break;
-                }
+        if ($page->mobileLayout !== false) {
+            return;
+        }
+
+        foreach ($parentModels as $parentModel) {
+            if ($parentModel->includeLayout && $parentModel->mobileLayout) {
+                $page->mobileLayout = $parentModel->mobileLayout;
+                break;
             }
         }
     }
