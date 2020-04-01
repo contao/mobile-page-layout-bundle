@@ -23,6 +23,10 @@ class InheritMobileLayoutListener
     {
         $page->mobileLayout = $page->includeLayout ? $page->mobileLayout : false;
 
+        if ($page->mobileLayout !== false) {
+            return;
+        }
+
         foreach ($parentModels as $parentModel) {
             if ($parentModel->includeLayout && $parentModel->mobileLayout) {
                 $page->mobileLayout = $parentModel->mobileLayout;
