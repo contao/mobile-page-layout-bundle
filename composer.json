@@ -10,8 +10,9 @@
         }
     ],
     "require": {
-        "php": "^7.1 | ^8.0",
-        "contao/core-bundle": "^4.8"
+        "php": "^7.2 || ^8.0",
+        "contao/core-bundle": "^4.9",
+        "symfony/http-kernel": "^4.4 || ^5.4"
     },
     "require-dev": {
         "contao/manager-plugin": "^2.3.1",
@@ -43,5 +44,11 @@
         "forum": "https://community.contao.org",
         "source": "https://github.com/contao/mobile-page-layout-bundle",
         "docs": "https://docs.contao.org"
+    },
+    "config": {
+        "allow-plugins": {
+            "contao-components/installer": true,
+            "contao/manager-plugin": true
+        }
     }
 }

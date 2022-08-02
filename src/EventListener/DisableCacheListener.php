@@ -13,11 +13,11 @@ declare(strict_types=1);
 namespace Contao\MobilePageLayoutBundle\EventListener;
 
 use Contao\PageModel;
-use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
+use Symfony\Component\HttpKernel\Event\ResponseEvent;
 
 class DisableCacheListener
 {
-    public function onKernelResponse(FilterResponseEvent $event): void
+    public function onKernelResponse(ResponseEvent $event): void
     {
         if (!isset($GLOBALS['objPage'])) {
             return;
