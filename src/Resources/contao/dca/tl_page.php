@@ -21,7 +21,24 @@ $GLOBALS['TL_DCA']['tl_page']['fields']['mobileLayout'] = array
     'search'                  => true,
     'inputType'               => 'select',
     'foreignKey'              => 'tl_layout.name',
-    'options_callback'        => array('tl_page', 'getPageLayouts'),
+    'options_callback'        => function ()
+    {
+        $objLayout = Contao\Database::getInstance()->execute("SELECT l.id, l.name, t.name AS theme FROM tl_layout l LEFT JOIN tl_theme t ON l.pid=t.id ORDER BY t.name, l.name");
+
+        if ($objLayout->numRows < 1)
+        {
+            return array();
+        }
+
+        $return = array();
+
+        while ($objLayout->next())
+        {
+            $return[$objLayout->theme][$objLayout->id] = $objLayout->name;
+        }
+
+        return $return;
+    },
     'eval'                    => array('includeBlankOption'=>true, 'chosen'=>true, 'tl_class'=>'w50'),
     'sql'                     => "int(10) unsigned NOT NULL default '0'",
     'relation'                => array('type'=>'hasOne', 'load'=>'lazy')

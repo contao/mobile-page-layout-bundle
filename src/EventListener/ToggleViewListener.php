@@ -17,7 +17,7 @@ use Contao\CoreBundle\Routing\ScopeMatcher;
 use Contao\System;
 use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Component\HttpFoundation\RedirectResponse;
-use Symfony\Component\HttpKernel\Event\GetResponseEvent;
+use Symfony\Component\HttpKernel\Event\RequestEvent;
 
 class ToggleViewListener
 {
@@ -40,7 +40,7 @@ class ToggleViewListener
     /**
      * Toggles the TL_VIEW cookie and redirects back to the referring page.
      */
-    public function onKernelRequest(GetResponseEvent $event): void
+    public function onKernelRequest(RequestEvent $event): void
     {
         $request = $event->getRequest();
 

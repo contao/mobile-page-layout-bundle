@@ -17,7 +17,7 @@ use Contao\PageModel;
 use Contao\TestCase\ContaoTestCase;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
+use Symfony\Component\HttpKernel\Event\ResponseEvent;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 
 class DisableCacheListenerTest extends ContaoTestCase
@@ -27,7 +27,7 @@ class DisableCacheListenerTest extends ContaoTestCase
         $response = new Response();
         $response->setSharedMaxAge(600);
 
-        $event = new FilterResponseEvent(
+        $event = new ResponseEvent(
             $this->createMock(HttpKernelInterface::class),
             Request::create('/foobar'),
             HttpKernelInterface::MASTER_REQUEST,
@@ -49,7 +49,7 @@ class DisableCacheListenerTest extends ContaoTestCase
         $response = new Response();
         $response->setSharedMaxAge(600);
 
-        $event = new FilterResponseEvent(
+        $event = new ResponseEvent(
             $this->createMock(HttpKernelInterface::class),
             Request::create('/foobar'),
             HttpKernelInterface::MASTER_REQUEST,
